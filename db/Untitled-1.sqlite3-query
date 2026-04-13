@@ -15,4 +15,4 @@ INSERT INTO test (name, number) VALUES ('Шахрияр', 597363487);
 
 UPDATE test SET number  = 59736333487 WHERE id = 1;
 
-SELECT * FROM test WHERE id = 1;
+SELECT * FROM test WHERE id = 2;
