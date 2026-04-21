@@ -47,6 +47,8 @@ def main(page: ft.Page):
     
     def toggle_task(task_id, is_completed):
         print(is_completed)
+        main_db.update_task(task_id=task_id, completed=int(is_completed))
+        load_tasks()
 
     def add_task(e):
         if task_input.value:
