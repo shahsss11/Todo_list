@@ -17,4 +17,3 @@ UPDATE test SET number = 070986 WHERE id = 1;
 select * from test WHERE name = 'Бектур';
 
 ALTER TABLE test ADD COLUMN completed INTEGER DEFAULT 0;
-

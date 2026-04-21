@@ -51,3 +51,10 @@ def get_tasks(filter_type):
     tasks = cursor.fetchall()
     conn.close()
     return tasks
+
+def delete_completed_tasks():
+    conn = sqlite3.connect(path_db)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM tasks WHERE completed = 1")
+    conn.commit()
+    conn.close()

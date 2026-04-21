@@ -75,9 +75,11 @@ def main(page: ft.Page):
         ft.ElevatedButton('Готово', on_click=lambda e: set_filter('completed'), icon=ft.Icons.CHECK_BOX, icon_color=ft.Colors.GREEN_900)
     ], alignment=ft.MainAxisAlignment.SPACE_AROUND)
 
+    delete_button = ft.IconButton(icon=ft.Icons.DELETE, on_click=lambda e: (main_db.delete_completed_tasks() , load_tasks()), icon_color=ft.Colors.RED_900)
+
     send_task = ft.Row([task_input, task_button])
 
-    page.add(send_task, filter_buttons, task_list)
+    page.add(send_task, filter_buttons, task_list, delete_button)
     load_tasks()
 
 
