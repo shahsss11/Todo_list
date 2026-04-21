@@ -72,14 +72,15 @@ def main(page: ft.Page):
     filter_buttons = ft.Row([
         ft.ElevatedButton('Все задачи', on_click=lambda e: set_filter('all'), icon=ft.Icons.ALL_INBOX, icon_color=ft.Colors.BLACK),
         ft.ElevatedButton('В работе', on_click=lambda e: set_filter('uncompleted'), icon=ft.Icons.WATCH, icon_color=ft.Colors.YELLOW_900),
-        ft.ElevatedButton('Готово', on_click=lambda e: set_filter('completed'), icon=ft.Icons.CHECK_BOX, icon_color=ft.Colors.GREEN_900)
+        ft.ElevatedButton('Готово', on_click=lambda e: set_filter('completed'), icon=ft.Icons.CHECK_BOX, icon_color=ft.Colors.GREEN_900),
+        ft.ElevatedButton('Удалить завершенные', icon=ft.Icons.DELETE, on_click=lambda e: (main_db.delete_completed_tasks() , load_tasks()), icon_color=ft.Colors.RED_900)
+
     ], alignment=ft.MainAxisAlignment.SPACE_AROUND)
 
-    delete_button = ft.IconButton(icon=ft.Icons.DELETE, on_click=lambda e: (main_db.delete_completed_tasks() , load_tasks()), icon_color=ft.Colors.RED_900)
 
     send_task = ft.Row([task_input, task_button])
 
-    page.add(send_task, filter_buttons, task_list, delete_button)
+    page.add(send_task, filter_buttons, task_list)
     load_tasks()
 
 
