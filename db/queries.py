@@ -13,9 +13,10 @@ tasks_table = """
 # Create - создание записи
 
 insert_task = 'INSERT INTO tasks (task) VALUES (?)'
+# Create - создание записи
 
+    # Read - Просмотр записи
 
-# Read - Просмотр записи
 select_tasks = 'SELECT * FROM tasks'
 
 select_tasks_completed = 'SELECT * FROM tasks WHERE completed = 1'

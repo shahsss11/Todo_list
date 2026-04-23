@@ -1,5 +1,6 @@
 import flet as ft
 from db import main_db 
+from config import path_db
 
 
 def main(page: ft.Page):
@@ -11,12 +12,28 @@ def main(page: ft.Page):
 
     def load_tasks():
         task_list.controls.clear()
-        for task_id, task_text, completed in main_db.get_tasks(filter_type=filter_type):
-            task_list.controls.append(view_tasks(
-                task_id=task_id,
-                task_text=task_text,
-                completed=completed
-                ))
+
+        tasks = list(main_db.get_tasks(filter_type=filter_type))
+
+        if len(tasks) == 0:
+            task_list.controls.append(
+                ft.Text("Список задач пуст")
+            )
+        else:
+            task_list.controls.append(
+                ft.Text(f"Всего задач: {len(tasks)}")
+            )
+
+            for task_id, task_text, completed in tasks:
+                task_list.controls.append(
+                    view_tasks(
+                        task_id=task_id,
+                        task_text=task_text,
+                        completed=completed
+                    )
+                )
+
+        page.update()
 
 
     def view_tasks(task_id, task_text, completed=None):
@@ -53,10 +70,10 @@ def main(page: ft.Page):
     def add_task(e):
         if task_input.value:
             task = task_input.value
-            task_id = main_db.add_task(task=task)
-            print(f'Задача {task} добавлена! Его ID - {task_id}')
-            task_list.controls.append(view_tasks(task_id=task_id, task_text=task))
+            main_db.add_task(task=task)
+
             task_input.value = None
+            load_tasks()
 
 
     task_input = ft.TextField(label="Введите задачу", expand=True, on_submit=add_task)
